@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import axios from "axios";
+import api from "../../service/api";
+import { Link } from "react-router-dom";
 class Table extends Component {
   constructor(props) {
     super(props);
@@ -7,10 +8,11 @@ class Table extends Component {
   }
 
   apagar() {
-    axios
-      .delete("http://localhost:3001/disciplinas/" + this.props.disciplinas.id)
+    api
+      .delete(`/disciplinas/delete/${this.props.disciplinas._id}`)
       .then((res) => {
-        console.log("registro apagado");
+        this.props.apagarElementoPorId(this.props.disciplinas._id);
+        alert("registro apagado");
       })
       .catch((error) => {
         console.log(error);
@@ -19,27 +21,22 @@ class Table extends Component {
   render() {
     return (
       <tr>
-        <td>{this.props.disciplinas.id}</td>
+        <td>{this.props.disciplinas._id}</td>
 
-        <td style={{ textAlign: "center" }}>
-          {this.props.disciplinas.nome}
-          <button onClick={this.apagar} className="btn btn-danger">
-            Apagar
-          </button>
-        </td>
-        <td style={{ textAlign: "center" }}>
-          {this.props.disciplinas.curso}]{" "}
-          <button onClick={this.apagar} className="btn btn-danger">
-            Apagar
-          </button>
-        </td>
+        <td style={{ textAlign: "center" }}>{this.props.disciplinas.nome}</td>
+        <td style={{ textAlign: "center" }}>{this.props.disciplinas.curso} </td>
         <td style={{ textAlign: "center" }}>
           {this.props.disciplinas.capacidade}
-          <button onClick={this.apagar} className="btn btn-danger">
-            Apagar
-          </button>
         </td>
-        <td>
+        <td style={{ textAlign: "center" }}>
+          <Link
+            to={"/edit/" + this.props.disciplinas._id}
+            className="btn btn-primary"
+          >
+            Editar
+          </Link>
+        </td>
+        <td style={{ textAlign: "center" }}>
           <button onClick={this.apagar} className="btn btn-danger">
             Apagar
           </button>

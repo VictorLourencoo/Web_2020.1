@@ -1,15 +1,14 @@
-import React, { Component } from "react";
-
-import axios from "axios";
+import React, { Component } from 'react';
+import Main from '../Main/Main';
+import api from '../../service/api';
 class Edit extends Component {
   constructor(props) {
     super(props);
-    this.state = { nome: "" };
-    this.state = { curso: "" };
-    this.state = { capacidade: "" };
+    this.state = { nome: '', curso: '', capacidade: '' };
     this.setNome = this.setNome.bind(this);
     this.setCurso = this.setCurso.bind(this);
     this.setCapacidade = this.setCapacidade.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
   }
 
   setNome(e) {
@@ -28,24 +27,25 @@ class Edit extends Component {
       curso: this.state.curso,
       capacidade: this.state.capacidade,
     };
-    axios
+    api
       .put(
-        "http://localhost:3001/disciplinas" + this.props.match.params.id,
-        disciplinaAtualizada
+        '/disciplinas/atualizar/' +
+          this.props.match.params.id +
+          disciplinaAtualizada
       )
       .then((res) => {
         //console.log(res.data.id);
-        this.props.history.push("/list");
+        this.props.history.push('/list');
       })
       .catch((error) => {
         console.log(error);
       });
-    this.setState({ nome: "", curso: "", capacidade: "" });
+    this.setState({ nome: '', curso: '', capacidade: '' });
   }
 
   componentDidMount() {
-    axios
-      .get("http://localhost:3001/disciplinas/" + this.props.match.params.id)
+    api
+      .get(`/disciplinas/${this.props.match.params.id}`)
       .then((res) => {
         this.setState({
           nome: res.data.nome,
@@ -60,11 +60,12 @@ class Edit extends Component {
 
   render() {
     return (
-      <div style={{ marginTop: 10 }}>
-        <h3>Adicionar Disciplina</h3>
+      <div className="container" style={{ marginTop: 10 }}>
+        <Main />
+        <h3>Editar Disciplina</h3>
         <form onSubmit={this.onSubmit}>
           <div className="form-group">
-            <label> Nome: </label>]
+            <label> Nome: </label>
             <input
               type="text"
               className="form-control"
@@ -74,7 +75,7 @@ class Edit extends Component {
           </div>
 
           <div className="form-group">
-            <label> Curso: </label>]
+            <label> Curso: </label>
             <input
               type="text"
               className="form-control"
@@ -84,7 +85,7 @@ class Edit extends Component {
           </div>
 
           <div className="form-group">
-            <label> Capacidade: </label>]
+            <label> Capacidade: </label>
             <input
               type="number"
               className="form-control"
@@ -95,7 +96,7 @@ class Edit extends Component {
 
           <div className="form-group">
             <input
-              type="submit"
+              type="Submit"
               value="Adicionar Disciplina"
               className="btn btn-primary"
             />

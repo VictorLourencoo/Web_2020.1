@@ -1,13 +1,12 @@
 import React from "react";
 
 import "bootstrap/dist/css/bootstrap.min.css";
-
 import { Link } from "react-router-dom";
 import Home from "../Home/Home";
 
 function Main() {
   return (
-    <div className="container">
+    <div>
       <Home />
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <Link to="/" className="navbar-brand">

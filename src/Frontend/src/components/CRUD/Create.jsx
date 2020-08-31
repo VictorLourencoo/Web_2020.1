@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import api from "../../service/api";
-
+import Main from "../Main/Main";
 export default class Create extends Component {
   constructor(props) {
     super(props);
@@ -50,8 +50,12 @@ export default class Create extends Component {
 
   render() {
     return (
-      <div style={{ marginTop: 10 }}>
-        <h3>Criar Estudante</h3>
+      <div
+        className="container"
+        style={{ marginTop: 10, alignItems: "center" }}
+      >
+        <Main />
+        <h3>Criar Disciplina</h3>
         <form onSubmit={this.onSubmit}>
           <div className="form-group">
             <label>Nome: </label>
